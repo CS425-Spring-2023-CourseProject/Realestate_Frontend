@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <!-- Navigation Bar -->
+    </nav>
+  </header>
+  <main>
+    <section class="booking">
+      <h1>Book Property</h1>
+      
+      <form id="booking-form" method="POST">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start_date" required>
+        
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end_date" required>
+        
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method" name="payment_method" required>
+          <!-- Dynamically populate payment methods for the user -->
+        </select>
+
+        <input type="submit" value="Book Property">
+      </form>
+    </section>
+  </main>
+  <footer>
+    <!-- Footer -->
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
