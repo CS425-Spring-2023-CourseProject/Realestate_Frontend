@@ -1,5 +1,5 @@
 async function fetchBookings() {
-    const response = await fetch('/api/bookings/');
+    const response = await fetch('http://127.0.0.1:8000/api/bookings/');
     const data = await response.json();
   
     if (response.ok) {
@@ -39,5 +39,9 @@ async function fetchBookings() {
     }
   });
   
-  // getCookie function remains the same
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
   

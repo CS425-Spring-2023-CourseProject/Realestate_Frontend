@@ -22,7 +22,7 @@ document.querySelector("form").addEventListener("submit", function (event) {
   }
   
   function sendLoginRequest(email, password) {
-    fetch("login_process", {
+    fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

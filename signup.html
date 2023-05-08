@@ -20,24 +20,25 @@
   <main>
     <section class="signup">
       <h2>Create an Account</h2>
-      <form action="signup_process" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+      <form method="POST">
+        {% csrf_token %}
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <label for="{{ form.name.id_for_label }}">Name:</label>
+        {{ form.name }}
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" id="phone_number" name="phone_number">
+        <label for="{{ form.phone_number.id_for_label }}">Phone Number:</label>
+        {{ form.phone_number }}
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="4" cols="50"></textarea>
+        <label for="{{ form.address.id_for_label }}">Address:</label>
+        {{ form.address }}
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="{{ form.password1.id_for_label }}">Password:</label>
+        {{ form.password1 }}
 
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+        <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+        {{ form.password2 }}
 
         <button type="submit" class="btn">Sign Up</button>
       </form>

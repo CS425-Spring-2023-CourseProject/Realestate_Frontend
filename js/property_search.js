@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         price_range: priceRange,
       };
   
-      const response = await fetch("property_search/", {
+      const response = await fetch("/property_search/", {
         method: "POST",
         body: JSON.stringify(searchParams),
         headers: {
