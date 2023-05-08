@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking</title>
-  <link rel="stylesheet" media="screen" href="css/style.css">
-  <script async src="js/script.js"></script>
+  <link rel="stylesheet" media="screen" href="css/booking.css">
+  <script async src="js/booking.js"></script>
 </head>
 <body>
   <header>
@@ -22,18 +22,20 @@
     <section class="booking">
       <h1>Booking Property</h1>
       
-      <form id="booking-form">
+      <form id="booking-form" action="{% url 'create_booking' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="property-id" value="{{ property_id }}">
         <div>
           <label for="start-date">Start Date:</label>
-          <input type="date" id="start-date" required>
+          <input type="date" id="start-date" name="start_date" required>
         </div>
         <div>
           <label for="end-date">End Date:</label>
-          <input type="date" id="end-date" required>
+          <input type="date" id="end-date" name="end_date" required>
         </div>
         <div>
           <label for="payment-method">Payment Method:</label>
-          <select id="payment-method" required>
+          <select id="payment-method" name="payment_method" required>
             <option value="">Select a payment method</option>
             <option value="visa">Visa ****1234</option>
             <option value="mastercard">Mastercard ****5678</option>
@@ -48,7 +50,5 @@
   <footer>
     <p>&copy; 2023 - My Real Estate Application</p>
   </footer>
-
-  <script src="scripts.js"></script>
 </body>
 </html>

@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
-  <link rel="stylesheet" media="screen" href="css/style.css">
-  <script async src="js/script.js"></script>
+  <link rel="stylesheet" media="screen" href="css/profile.css">
 </head>
 <body>
   <header>
@@ -24,27 +23,57 @@
 
       <!-- Personal Details -->
       <h2>Personal Details</h2>
-      <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your name">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Your email">
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" id="phone_number" name="phone_number" placeholder="Your phone number">
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in personal_details_form %}
+          <div class="form-group">
+            <label>{{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="form-error">
+                {{ field.errors }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
         <button type="submit">Update Personal Details</button>
       </form>
 
       <!-- Preferred Neighborhoods -->
       <h2>Preferred Neighborhoods</h2>
-      <form>
-        <!-- Add preferred neighborhood dropdown/select here -->
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in preferred_neighborhood_form %}
+          <div class="form-group">
+            <label>{{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="form-error">
+                {{ field.errors }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
         <button type="submit">Update Preferred Neighborhoods</button>
       </form>
 
       <!-- Credit Card Information -->
       <h2>Credit Card Information</h2>
-      <form>
-        <!-- Add credit card form fields here -->
+      <form method="POST">
+        {% csrf_token %}
+        {% for card_form in credit_card_forms %}
+          {% for field in card_form %}
+            <div class="form-group">
+              <label>{{ field.label_tag }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="form-error">
+                  {{ field.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% endfor %}
         <button type="submit">Update Credit Card Information</button>
       </form>
     </section>
@@ -52,7 +81,5 @@
   <footer>
     <p>&copy; 2023 - My Real Estate Application</p>
   </footer>
-
-  <script src="scripts.js"></script>
 </body>
 </html>

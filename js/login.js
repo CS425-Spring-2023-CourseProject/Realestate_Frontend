@@ -1,96 +1,47 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+  
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+  
+    if (validateEmail(email) && validatePassword(password)) {
+      // Send the data to the backend using an AJAX request
+      sendLoginRequest(email, password);
+    } else {
+      alert("Please enter a valid email and password.");
+    }
+  });
+  
+  function validateEmail(email) {
+    const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    return regex.test(email);
   }
   
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
+  function validatePassword(password) {
+    return password.length >= 6;
   }
   
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    display: inline;
-    margin-left: 1rem;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .logo {
-    font-weight: bold;
-  }
-  
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 6rem);
-  }
-  
-  .login {
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .login h2 {
-    margin-bottom: 1rem;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-  }
-  
-  button {
-    background-color: #333;
-    color: #fff;
-    font-weight: bold;
-    padding: 0.5rem;
-    cursor: pointer;
-    border: none;
-  }
-  
-  button:hover {
-    background-color: #555;
-  }
-  
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  function sendLoginRequest(email, password) {
+    fetch("login_process", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": document.getElementsByName("csrfmiddlewaretoken")[0].value,
+      },
+      body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          // Redirect to the home page or any other page after successful login
+          window.location.href = "/dashboard.html";
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }
   

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Bookings</title>
-  <link rel="stylesheet" media="screen" href="css/style.css">
-  <script async src="js/script.js"></script>
+  <link rel="stylesheet" media="screen" href="css/manage_bookings.css">
+  <script async src="js/manage_bookings.js"></script>
 </head>
 <body>
   <header>
@@ -35,6 +35,18 @@
         </thead>
         <tbody>
           <!-- Dynamically populate bookings for the user (renter/agent) -->
+          <script id="booking-row-template" type="text/template">
+            <tr>
+              <td>{{booking_id}}</td>
+              <td>{{property}}</td>
+              <td>{{rental_period}}</td>
+              <td>{{total_cost}}</td>
+              <td>{{payment_method}}</td>
+              <td>
+                <button class="cancel-booking" data-booking-id="{{booking_id}}">Cancel</button>
+              </td>
+            </tr>
+          </script>
         </tbody>
       </table>
     </section>
